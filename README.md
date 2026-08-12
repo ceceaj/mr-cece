@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mr. Cece | Gamified English Learning App
 
-## Getting Started
+A premium, interactive, and gamified EdTech application designed to make learning English vocabulary fun and highly effective. Built with a vibrant aesthetic, micro-animations, and AI integration to provide an engaging learning experience from beginner (A1) to advanced (C1) and specialized topics.
 
-First, run the development server:
+## 🚀 Tech Stack
+- **Framework:** Next.js 14 (App Router)
+- **Styling:** Tailwind CSS (with Dark Mode support)
+- **Animations:** Framer Motion
+- **AI Integration:** Google Generative AI (Gemini API) & Web Speech API
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Key Features
+- **Intelligent AI Voice Roleplay:** A conversational feature allowing users to practice speaking in real-life scenarios (e.g., Airport Check-in, Job Interviews). Powered by Gemini AI for contextual responses and grammar feedback, utilizing native browser STT (Speech-to-Text) and TTS (Text-to-Speech).
+- **Gamification Engine:** Features a 3-star mastery system, daily quests, streak tracking, and an in-game currency (Gems) economy to boost user retention.
+- **Dynamic Learning Path:** 50+ beautifully designed thematic levels covering standard CEFR (A1-C1) and specialized vocabulary (Business, Tech, Slang, Travel).
+- **Smart Review (Spaced Repetition):** Automatically tracks vocabulary mistakes and generates targeted flashcards for efficient memorization.
+- **Multiple Game Modes:** Standard normal mode, high-adrenaline "Speed Run", audio-only "Listening Mode", and hardcore "Typing Mode".
+- **Premium UX/UI:** Fluid page transitions, haptic feedback on mobile, dynamic time-based hero banners, and combo particle animations.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 💻 How to Run Locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/ceceaj/mr-cece.git
+   cd mr-cece-edtech
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. **Set up Environment Variables:**
+   Create a `.env` file in the root directory and add your Google Gemini API Key to enable the AI Voice Roleplay feature:
+   ```env
+   GEMINI_API_KEY=your_google_gemini_api_key_here
+   ```
+   *(Note: The app will still run without the key using a smart mocked fallback).*
 
-To learn more about Next.js, take a look at the following resources:
+4. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. **Open in Browser:**
+   Visit [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📱 Browser Compatibility
+For the best experience with the **AI Voice Roleplay** microphone (Speech-to-Text) functionality, please use the latest version of **Google Chrome** (Desktop or Android) or **Safari**.
