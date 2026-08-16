@@ -55,10 +55,10 @@ export default function MrCece({ expression = "idle", size = 120, className = ""
   const expr = expressions[expression];
 
   const bounceAnim = expression === "happy" || expression === "excited"
-    ? { y: [0, -8, 0], transition: { repeat: Infinity, duration: 0.8, ease: "easeInOut" } }
+    ? { y: [0, -8, 0], transition: { repeat: Infinity, duration: 0.8, ease: "easeInOut" as const } }
     : expression === "sad"
-    ? { rotate: [0, -3, 3, 0], transition: { repeat: Infinity, duration: 2, ease: "easeInOut" } }
-    : { y: [0, -3, 0], transition: { repeat: Infinity, duration: 2, ease: "easeInOut" } };
+    ? { rotate: [0, -3, 3, 0], transition: { repeat: Infinity, duration: 2, ease: "easeInOut" as const } }
+    : { y: [0, -3, 0], transition: { repeat: Infinity, duration: 2, ease: "easeInOut" as const } };
 
   return (
     <motion.div
