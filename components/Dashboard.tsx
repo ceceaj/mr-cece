@@ -22,7 +22,7 @@ type Tab = "home" | "learn" | "leaderboard" | "profile";
 
 const TABS = [
   { id: "home", icon: "🏠", label: "Home" },
-  { id: "learn", icon: "📚", label: "Learn" },
+  { id: "learn", icon: "📚", label: "Belajar" },
   { id: "leaderboard", icon: "🏆", label: "Rank" },
   { id: "profile", icon: "👤", label: "Profil" },
 ] as const;
@@ -37,14 +37,20 @@ function speakWord(word: string) {
   window.speechSynthesis.speak(utterance);
 }
 
+function getGreeting() {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 12) return { text: "Pagi", emoji: "🌅", gradient: "from-amber-400 via-orange-400 to-rose-400" };
+  if (hour >= 12 && hour < 15) return { text: "Siang", emoji: "☀️", gradient: "from-yellow-400 via-amber-400 to-orange-400" };
+  if (hour >= 15 && hour < 18) return { text: "Sore", emoji: "🌇", gradient: "from-orange-500 via-rose-500 to-pink-500" };
+  return { text: "Malam", emoji: "🌙", gradient: "from-indigo-600 via-violet-600 to-purple-700" };
+}
+
 export default function Dashboard({ profile, onSelectLevel, onToggleDarkMode, onStartReview, onStartRoleplay, onBuyItem }: DashboardProps) {
   const [activeTab, setActiveTab] = useState<Tab>("home");
 
-  // Word of the day logic
   const wordOfTheDay = useMemo(() => {
     const allPairs = vocabularyData.flatMap(l => l.pairs);
     const today = getTodayStr();
-    // Simple hash function based on date string to always pick the same word today
     let hash = 0;
     for (let i = 0; i < today.length; i++) {
       hash = today.charCodeAt(i) + ((hash << 5) - hash);
@@ -53,44 +59,81 @@ export default function Dashboard({ profile, onSelectLevel, onToggleDarkMode, on
     return allPairs[index];
   }, []);
 
-  return (
-    <div className="flex flex-col h-screen bg-slate-50 dark:bg-gray-900 relative pb-20">
+  const greeting = useMemo(() => getGreeting(), []);
 
-      {/* ── Header ── */}
-      <div className="bg-white dark:bg-gray-800 px-4 py-3 border-b-2 border-slate-200 dark:border-gray-700 sticky top-0 z-10">
-        <div className="max-w-md mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">🦍</span>
-            <span className="font-black text-xl text-blue-600 dark:text-blue-400 tracking-tight">Mr. Cece</span>
-          </div>
-          <div className="flex items-center gap-2.5 font-bold text-sm">
-            <div className="flex items-center gap-1 text-orange-500 bg-orange-50 dark:bg-orange-900/30 px-2.5 py-1 rounded-full border border-orange-200 dark:border-orange-700">
-              <span>🔥</span>
-              <span>{profile.streak}</span>
+  const totalLevels = vocabularyData.length;
+  const completedCount = profile.completedLevels.length;
+  const progressPct = totalLevels > 0 ? (completedCount / totalLevels) * 100 : 0;
+
+  return (
+    <div className="flex flex-col h-screen bg-slate-50 dark:bg-[#080B1A] relative pb-24">
+
+      {/* ══════════════════════════ HEADER ══════════════════════════ */}
+      <div className="sticky top-0 z-30">
+        {/* Glassmorphism header */}
+        <div className="glass-light dark:glass border-b border-white/40 dark:border-indigo-500/10 px-4 py-3">
+          <div className="max-w-md mx-auto flex items-center justify-between">
+            {/* Logo */}
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                <span className="text-xl">🦍</span>
+              </div>
+              <div>
+                <span className="font-black text-lg text-slate-800 dark:text-white tracking-tight" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
+                  Mr. <span className="gradient-text">Cece</span>
+                </span>
+              </div>
             </div>
-            <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2.5 py-1 rounded-full border border-emerald-200 dark:border-emerald-700">
-              <span>💎</span>
-              <span>{profile.gems || 0}</span>
+
+            {/* Stats pills */}
+            <div className="flex items-center gap-1.5">
+              {/* Streak */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center gap-1 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-500/30 px-2.5 py-1.5 rounded-xl"
+              >
+                <span className="text-sm">🔥</span>
+                <span className="font-black text-sm text-orange-600 dark:text-orange-400">{profile.streak}</span>
+              </motion.div>
+
+              {/* Gems */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center gap-1 bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-200 dark:border-cyan-500/30 px-2.5 py-1.5 rounded-xl"
+              >
+                <span className="text-sm">💎</span>
+                <span className="font-black text-sm text-cyan-600 dark:text-cyan-400">{profile.gems || 0}</span>
+              </motion.div>
+
+              {/* XP */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="hidden sm:flex items-center gap-1 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-500/30 px-2.5 py-1.5 rounded-xl"
+              >
+                <span className="text-sm">⭐</span>
+                <span className="font-black text-sm text-indigo-600 dark:text-indigo-400">{profile.xp}</span>
+              </motion.div>
+
+              {/* Dark mode */}
+              <motion.button
+                id="toggle-dark-mode"
+                onClick={onToggleDarkMode}
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.92 }}
+                className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-600/40 flex items-center justify-center text-base hover:bg-slate-200 dark:hover:bg-slate-700/60 transition-colors ml-1"
+              >
+                {profile.darkMode ? "☀️" : "🌙"}
+              </motion.button>
             </div>
-            <div className="flex items-center gap-1 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2.5 py-1 rounded-full border border-blue-200 dark:border-blue-700 hidden sm:flex">
-              <span>⭐</span>
-              <span>{profile.xp}</span>
-            </div>
-            <button
-              onClick={onToggleDarkMode}
-              className="w-9 h-9 rounded-xl border-2 border-b-[4px] border-slate-300 dark:border-gray-600 bg-white dark:bg-gray-700 flex items-center justify-center text-base active:border-b-[2px] active:translate-y-[2px] transition-all"
-            >
-              {profile.darkMode ? "☀️" : "🌙"}
-            </button>
           </div>
         </div>
       </div>
 
-      {/* ── Tab content ── */}
+      {/* ══════════════════════════ TAB CONTENT ══════════════════════════ */}
       <div className="flex-1 overflow-y-auto">
         <AnimatePresence mode="wait">
 
-          {/* HOME */}
+          {/* HOME TAB */}
           {activeTab === "home" && (
             <motion.div
               key="tab-home"
@@ -98,122 +141,169 @@ export default function Dashboard({ profile, onSelectLevel, onToggleDarkMode, on
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.22 }}
-              className="max-w-md mx-auto px-4 pt-5 pb-8"
+              className="max-w-md mx-auto px-4 pt-5 pb-8 space-y-5"
             >
-              {/* Hero Banner */}
-              <div className="mb-5">
-                {(() => {
-                  const hour = new Date().getHours();
-                  let greeting = "Malam";
-                  let bgClass = "from-indigo-900 to-purple-900";
-                  let icon = "🌙";
-                  if (hour >= 5 && hour < 12) {
-                    greeting = "Pagi";
-                    bgClass = "from-blue-400 to-cyan-300";
-                    icon = "🌅";
-                  } else if (hour >= 12 && hour < 15) {
-                    greeting = "Siang";
-                    bgClass = "from-amber-400 to-orange-400";
-                    icon = "☀️";
-                  } else if (hour >= 15 && hour < 18) {
-                    greeting = "Sore";
-                    bgClass = "from-orange-500 to-rose-400";
-                    icon = "🌇";
-                  }
-                  
-                  return (
-                    <div className={`rounded-3xl p-6 bg-gradient-to-r ${bgClass} text-white shadow-lg relative overflow-hidden`}>
-                      <div className="absolute right-[-20px] top-[-20px] text-8xl opacity-30 rotate-12">{icon}</div>
-                      <div className="relative z-10">
-                        <h2 className="text-2xl font-black mb-1">
-                          Selamat {greeting}, {profile.name}! 👋
-                        </h2>
-                        <p className="font-bold text-sm text-white/90">
-                          {profile.completedLevels.length === 0
-                            ? "Mulai perjalanan kosakatamu hari ini!"
-                            : `${profile.completedLevels.length} level selesai — terus semangat! 💪`}
-                        </p>
-                      </div>
+              {/* ── Hero Banner ── */}
+              <div className={`relative rounded-3xl p-6 bg-gradient-to-br ${greeting.gradient} text-white shadow-xl overflow-hidden`}>
+                {/* Decorative circles */}
+                <div className="absolute -right-8 -top-8 w-36 h-36 bg-white/10 rounded-full" />
+                <div className="absolute -right-2 -bottom-10 w-24 h-24 bg-white/10 rounded-full" />
+                <div className="absolute right-10 top-4 text-5xl opacity-25 rotate-12 select-none">{greeting.emoji}</div>
+
+                <div className="relative z-10">
+                  <p className="text-white/80 font-bold text-xs uppercase tracking-widest mb-1">
+                    Selamat {greeting.text}
+                  </p>
+                  <h2 className="text-2xl font-black mb-3" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
+                    {profile.name}! 👋
+                  </h2>
+
+                  {/* Overall progress */}
+                  <div className="bg-white/15 rounded-2xl px-4 py-3">
+                    <div className="flex justify-between items-center mb-1.5">
+                      <span className="text-xs font-bold text-white/80">Progress Keseluruhan</span>
+                      <span className="text-xs font-black text-white">{completedCount}/{totalLevels} level</span>
                     </div>
-                  );
-                })()}
+                    <div className="h-2 bg-white/20 rounded-full overflow-hidden">
+                      <motion.div
+                        className="h-full bg-white rounded-full shadow-sm"
+                        initial={{ width: 0 }}
+                        animate={{ width: `${progressPct}%` }}
+                        transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              {/* Daily Quests */}
+              {/* ── Daily Quests ── */}
               {profile.quests && profile.quests.length > 0 && (
-                <div className="mb-6 bg-white dark:bg-gray-800 rounded-3xl p-5 border-2 border-slate-200 dark:border-gray-700 shadow-sm">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="font-black text-slate-800 dark:text-white flex items-center gap-2">
-                      <span>🎯</span> Misi Harian
+                <div className="premium-card p-5">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-md shadow-amber-500/30">
+                      <span className="text-sm">🎯</span>
+                    </div>
+                    <h3 className="font-black text-slate-800 dark:text-white" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
+                      Misi Harian
                     </h3>
+                    <div className="ml-auto text-xs font-bold text-slate-400">
+                      {profile.quests.filter(q => q.completed).length}/{profile.quests.length} selesai
+                    </div>
                   </div>
+
                   <div className="flex flex-col gap-3">
-                    {profile.quests.map((q) => (
-                      <div key={q.id} className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-gray-700 flex items-center justify-center text-xl shrink-0">
+                    {profile.quests.map((q, i) => (
+                      <motion.div
+                        key={q.id}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.08 }}
+                        className={`flex items-center gap-3 p-3 rounded-2xl transition-colors ${
+                          q.completed
+                            ? "bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-500/20"
+                            : "bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/40"
+                        }`}
+                      >
+                        <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-lg shrink-0 ${
+                          q.completed ? "bg-emerald-100 dark:bg-emerald-800/50" : "bg-slate-100 dark:bg-slate-700/50"
+                        }`}>
                           {q.completed ? "✅" : "⏳"}
                         </div>
-                        <div className="flex-1">
+                        <div className="flex-1 min-w-0">
                           <div className="flex justify-between items-center mb-1">
-                            <p className="font-bold text-sm text-slate-700 dark:text-gray-200">{q.title}</p>
-                            <span className="text-xs font-black text-blue-500">
-                              {q.progress} / {q.target}
+                            <p className={`font-bold text-sm truncate ${q.completed ? "text-emerald-700 dark:text-emerald-300" : "text-slate-700 dark:text-slate-200"}`}>
+                              {q.title}
+                            </p>
+                            <span className={`text-xs font-black ml-2 shrink-0 ${q.completed ? "text-emerald-600 dark:text-emerald-400" : "text-indigo-500 dark:text-indigo-400"}`}>
+                              {q.progress}/{q.target}
                             </span>
                           </div>
-                          <div className="w-full h-2 bg-slate-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                            <div 
-                              className={`h-full rounded-full transition-all duration-500 ${q.completed ? 'bg-green-500' : 'bg-blue-500'}`}
-                              style={{ width: `${Math.min(100, (q.progress / q.target) * 100)}%` }}
+                          <div className="h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                            <motion.div
+                              className={`h-full rounded-full ${q.completed ? "bg-gradient-to-r from-emerald-400 to-emerald-500" : "bg-gradient-to-r from-indigo-400 to-violet-500"}`}
+                              initial={{ width: 0 }}
+                              animate={{ width: `${Math.min(100, (q.progress / q.target) * 100)}%` }}
+                              transition={{ duration: 0.6, ease: "easeOut" }}
                             />
                           </div>
                         </div>
                         {q.completed && q.claimed && (
-                          <div className="text-xs font-black text-emerald-500 bg-emerald-50 dark:bg-emerald-900/40 px-2 py-1 rounded-lg">
+                          <div className="shrink-0 text-xs font-black text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-900/40 px-2 py-1 rounded-lg border border-emerald-200 dark:border-emerald-600/30">
                             +{q.rewardGems}💎
                           </div>
                         )}
-                      </div>
+                      </motion.div>
                     ))}
                   </div>
                 </div>
               )}
 
-              {/* Word of the Day */}
+              {/* ── Word of the Day ── */}
               {wordOfTheDay && (
-                <div className="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-3xl p-5 text-white mb-6 shadow-lg shadow-blue-500/20 relative overflow-hidden">
-                  <div className="absolute top-0 right-0 p-4 opacity-20 text-6xl rotate-12">🌟</div>
+                <motion.div
+                  whileHover={{ y: -2 }}
+                  className="relative rounded-3xl p-5 bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 text-white shadow-xl shadow-indigo-500/25 overflow-hidden"
+                >
+                  {/* Decorative */}
+                  <div className="absolute -right-4 -top-4 w-32 h-32 bg-white/5 rounded-full" />
+                  <div className="absolute right-8 bottom-2 w-16 h-16 bg-white/5 rounded-full" />
+                  <div className="absolute top-3 right-3 opacity-20 select-none">
+                    <span className="text-4xl star-spin inline-block">✨</span>
+                  </div>
+
                   <div className="relative z-10">
-                    <p className="text-blue-100 font-bold text-xs uppercase tracking-widest mb-2 flex items-center gap-1">
+                    <p className="text-indigo-200 font-bold text-xs uppercase tracking-widest mb-3 flex items-center gap-1.5">
                       <span>💡</span> Word of the Day
                     </p>
-                    <div className="flex justify-between items-end">
-                      <div>
-                        <h3 className="text-3xl font-black mb-1">{wordOfTheDay.en}</h3>
-                        <p className="text-blue-100 font-medium">{wordOfTheDay.id}</p>
+                    <div className="flex justify-between items-end gap-4">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-3xl font-black mb-1 tracking-tight" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
+                          {wordOfTheDay.en}
+                        </h3>
+                        <p className="text-indigo-200 font-semibold text-sm">{wordOfTheDay.id}</p>
                       </div>
-                      <button
+                      <motion.button
+                        id="speak-word-of-day"
                         onClick={() => speakWord(wordOfTheDay.en)}
-                        className="w-12 h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-xl transition-colors active:scale-90"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="w-12 h-12 bg-white/15 hover:bg-white/25 rounded-2xl flex items-center justify-center text-xl transition-colors shrink-0"
                       >
                         🔊
-                      </button>
+                      </motion.button>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               )}
 
-              {/* Path */}
-              <LearningPath
-                completedLevels={profile.completedLevels}
-                stars={profile.stars || {}}
-                onSelectLevel={onSelectLevel}
-              />
+              {/* ── Learning Path ── */}
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-1 h-5 rounded-full bg-gradient-to-b from-indigo-500 to-violet-600" />
+                  <h3 className="font-black text-slate-800 dark:text-white" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
+                    Jalur Belajar
+                  </h3>
+                </div>
+                <LearningPath
+                  completedLevels={profile.completedLevels}
+                  stars={profile.stars || {}}
+                  onSelectLevel={onSelectLevel}
+                />
+              </div>
             </motion.div>
           )}
 
+          {/* LEARN TAB */}
           {activeTab === "learn" && (
-            <motion.div key="tab-learn" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.22 }} className="max-w-md mx-auto px-4">
-              <LearnTab 
+            <motion.div
+              key="tab-learn"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.22 }}
+              className="max-w-md mx-auto px-4"
+            >
+              <LearnTab
                 mistakesCount={profile.mistakes?.length || 0}
                 onStartReview={onStartReview}
                 onStartRoleplay={onStartRoleplay}
@@ -221,17 +311,33 @@ export default function Dashboard({ profile, onSelectLevel, onToggleDarkMode, on
             </motion.div>
           )}
 
+          {/* LEADERBOARD TAB */}
           {activeTab === "leaderboard" && (
-            <motion.div key="tab-leaderboard" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.22 }} className="max-w-md mx-auto px-4">
+            <motion.div
+              key="tab-leaderboard"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.22 }}
+              className="max-w-md mx-auto px-4"
+            >
               <LeaderboardTab profile={profile} />
             </motion.div>
           )}
 
+          {/* PROFILE TAB */}
           {activeTab === "profile" && (
-            <motion.div key="tab-profile" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.22 }} className="max-w-md mx-auto px-4">
-              <ProfileTab 
-                profile={profile} 
-                onToggleDarkMode={onToggleDarkMode} 
+            <motion.div
+              key="tab-profile"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.22 }}
+              className="max-w-md mx-auto px-4"
+            >
+              <ProfileTab
+                profile={profile}
+                onToggleDarkMode={onToggleDarkMode}
                 onBuyItem={onBuyItem}
               />
             </motion.div>
@@ -240,34 +346,47 @@ export default function Dashboard({ profile, onSelectLevel, onToggleDarkMode, on
         </AnimatePresence>
       </div>
 
-      {/* ── Bottom Navigation ── */}
-      <div className="fixed bottom-0 left-0 right-0 z-20">
-        <div className="max-w-md mx-auto bg-white dark:bg-gray-800 border-t-2 border-slate-200 dark:border-gray-700 px-2 py-2 flex justify-around">
-          {TABS.map((tab) => {
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id as Tab)}
-                className={`
-                  flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-2xl transition-all duration-200
-                  ${isActive
-                    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30"
-                    : "text-slate-400 dark:text-gray-500 hover:text-slate-600 dark:hover:text-gray-300"}
-                `}
-              >
-                <motion.span animate={isActive ? { scale: [1, 1.25, 1] } : { scale: 1 }} transition={{ duration: 0.3 }} className="text-2xl leading-none">
-                  {tab.icon}
-                </motion.span>
-                <span className={`text-[10px] font-black uppercase tracking-wider ${isActive ? "" : "opacity-60"}`}>
-                  {tab.label}
-                </span>
-                {isActive && (
-                  <motion.div layoutId="nav-dot" className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-                )}
-              </button>
-            );
-          })}
+      {/* ══════════════════════════ BOTTOM NAV ══════════════════════════ */}
+      <div className="fixed bottom-0 left-0 right-0 z-20 px-4 pb-4 pt-2">
+        <div className="max-w-md mx-auto">
+          <div className="glass-light dark:glass border border-white/60 dark:border-indigo-500/20 rounded-2xl px-2 py-2 flex justify-around shadow-2xl shadow-black/10 dark:shadow-black/40">
+            {TABS.map((tab) => {
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  id={`nav-tab-${tab.id}`}
+                  onClick={() => setActiveTab(tab.id as Tab)}
+                  className={`
+                    relative flex flex-col items-center gap-0.5 px-4 py-2 rounded-xl transition-all duration-200
+                    ${isActive
+                      ? "text-white"
+                      : "text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300"
+                    }
+                  `}
+                >
+                  {/* Active background pill */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-active-bg"
+                      className="absolute inset-0 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/40"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <motion.span
+                    animate={isActive ? { scale: [1, 1.2, 1] } : { scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="relative text-xl leading-none z-10"
+                  >
+                    {tab.icon}
+                  </motion.span>
+                  <span className={`relative text-[10px] font-black uppercase tracking-wider z-10 ${isActive ? "" : "opacity-60"}`}>
+                    {tab.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

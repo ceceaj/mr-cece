@@ -174,8 +174,8 @@ export default function ListeningBoard({ level, onLevelComplete, onBackToMenu }:
               </span>
             </div>
 
-            <div className="flex items-center gap-1 text-blue-600 bg-blue-50 dark:bg-blue-900/40 dark:text-blue-300 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-700 text-sm font-black">
-              ⭐ {xp} XP
+            <div className="flex items-center gap-1 text-amber-600 bg-amber-50/90 dark:bg-amber-900/40 dark:text-amber-300 px-3 py-1.5 rounded-full border border-amber-200 dark:border-amber-700/50 text-sm font-black shadow-sm backdrop-blur-md">
+              <span className="drop-shadow-sm">⭐</span> {xp} XP
             </div>
           </div>
 
@@ -206,9 +206,9 @@ export default function ListeningBoard({ level, onLevelComplete, onBackToMenu }:
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => currentPair && speakWord(currentPair.en)}
-          className="w-32 h-32 rounded-full bg-blue-100 dark:bg-blue-900/40 border-4 border-blue-400 dark:border-blue-600 shadow-xl flex items-center justify-center relative overflow-hidden group"
+          className="w-32 h-32 rounded-full bg-indigo-50/80 dark:bg-indigo-900/40 backdrop-blur-md border-4 border-indigo-400 dark:border-indigo-500 shadow-[0_0_30px_rgba(99,102,241,0.2)] flex items-center justify-center relative overflow-hidden group cursor-pointer"
         >
-          <div className="absolute inset-0 bg-blue-400/20 group-hover:bg-blue-400/40 transition-colors" />
+          <div className="absolute inset-0 bg-indigo-400/20 group-hover:bg-indigo-400/40 transition-colors" />
           <span className="text-6xl relative z-10 group-active:scale-90 transition-transform">🔊</span>
         </motion.button>
         <p className="text-sm font-bold text-slate-500 dark:text-gray-400 uppercase tracking-widest -mt-4">
@@ -222,15 +222,15 @@ export default function ListeningBoard({ level, onLevelComplete, onBackToMenu }:
               const isSelected = selectedAnswer === opt.id;
               const isCorrectAnswer = currentPair?.id === opt.id;
               
-              let stateClass = "bg-white dark:bg-gray-800 border-slate-200 dark:border-gray-700 text-slate-700 dark:text-gray-200";
+              let stateClass = "bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-slate-200 dark:border-gray-600 text-slate-700 dark:text-gray-100 hover:border-indigo-400 shadow-sm hover:shadow-indigo-500/20 cursor-pointer";
               
               if (isChecking) {
                 if (isCorrectAnswer) {
-                  stateClass = "bg-green-100 dark:bg-green-900/60 border-green-500 text-green-800 dark:text-green-200";
+                  stateClass = "bg-emerald-500 dark:bg-emerald-600 border-emerald-700 text-white shadow-[0_0_20px_rgba(16,185,129,0.5)] z-10 cursor-default";
                 } else if (isSelected) {
-                  stateClass = "bg-red-100 dark:bg-red-900/60 border-red-500 text-red-800 dark:text-red-200";
+                  stateClass = "bg-red-500 dark:bg-red-600 border-red-700 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)] z-10 cursor-default";
                 } else {
-                  stateClass = "opacity-50 grayscale";
+                  stateClass = "opacity-50 grayscale cursor-default bg-white/50 dark:bg-gray-800/50";
                 }
               }
 

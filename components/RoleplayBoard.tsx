@@ -168,7 +168,7 @@ export default function RoleplayBoard({ onBackToMenu }: RoleplayBoardProps) {
                 setMessages([{ role: "model", text: `Hi! Welcome to the ${s.title.toLowerCase()}. How can I help you today?` }]);
                 speak(`Hi! Welcome to the ${s.title.toLowerCase()}. How can I help you today?`);
               }}
-              className="bg-white dark:bg-gray-800 p-5 rounded-3xl border-2 border-b-[6px] border-blue-500 active:border-b-[2px] active:translate-y-[4px] transition-all flex items-center gap-4 text-left"
+              className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl p-5 rounded-3xl border-2 border-b-[6px] border-indigo-500 hover:border-indigo-400 active:border-b-[2px] active:translate-y-[4px] shadow-lg shadow-indigo-500/10 transition-all flex items-center gap-4 text-left group"
             >
               <span className="text-4xl">{s.emoji}</span>
               <div>
@@ -215,8 +215,8 @@ export default function RoleplayBoard({ onBackToMenu }: RoleplayBoardProps) {
           >
             <div className={`max-w-[80%] p-4 rounded-2xl ${
               m.role === "user" 
-                ? "bg-blue-500 text-white rounded-br-none" 
-                : "bg-white dark:bg-gray-800 border-2 border-slate-200 dark:border-gray-700 text-slate-800 dark:text-white rounded-bl-none"
+                ? "bg-indigo-500 text-white rounded-br-none shadow-md shadow-indigo-500/20" 
+                : "bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-2 border-slate-200 dark:border-gray-700 text-slate-800 dark:text-white rounded-bl-none shadow-sm"
             }`}>
               <p className="font-medium text-[15px]">{m.text}</p>
             </div>
@@ -224,14 +224,14 @@ export default function RoleplayBoard({ onBackToMenu }: RoleplayBoardProps) {
         ))}
         {transcript && (
           <div className="flex justify-end">
-            <div className="max-w-[80%] p-4 rounded-2xl bg-blue-400 text-white rounded-br-none opacity-70">
+            <div className="max-w-[80%] p-4 rounded-2xl bg-indigo-400 text-white rounded-br-none opacity-70">
               <p className="font-medium text-[15px] italic">{transcript}...</p>
             </div>
           </div>
         )}
         {isLoading && (
           <div className="flex justify-start">
-            <div className="max-w-[80%] p-4 rounded-2xl bg-white dark:bg-gray-800 border-2 border-slate-200 dark:border-gray-700 rounded-bl-none">
+            <div className="max-w-[80%] p-4 rounded-2xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-2 border-slate-200 dark:border-gray-700 rounded-bl-none shadow-sm">
               <div className="flex gap-1">
                 <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" />
                 <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }} />
@@ -264,7 +264,7 @@ export default function RoleplayBoard({ onBackToMenu }: RoleplayBoardProps) {
       </AnimatePresence>
 
       {/* Mic Button Area */}
-      <div className="bg-white dark:bg-gray-800 p-6 border-t-2 border-slate-200 dark:border-gray-700 flex justify-center shrink-0">
+      <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl p-6 border-t-2 border-slate-200 dark:border-gray-700 flex justify-center shrink-0 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
         <button
           onPointerDown={startRecording}
           onPointerUp={stopRecording}
@@ -274,7 +274,7 @@ export default function RoleplayBoard({ onBackToMenu }: RoleplayBoardProps) {
             w-24 h-24 rounded-full flex items-center justify-center text-4xl transition-all shadow-xl
             ${isRecording 
               ? "bg-red-500 scale-110 shadow-red-500/50" 
-              : "bg-blue-500 shadow-blue-500/30 active:scale-95"}
+              : "bg-indigo-500 shadow-indigo-500/40 active:scale-95"}
             ${isLoading ? "opacity-50 grayscale cursor-not-allowed" : ""}
           `}
         >

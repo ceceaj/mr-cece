@@ -44,13 +44,13 @@ function Particle({ x, y, color }: { x: number; y: number; color: string }) {
 function getStateClass(state: ButtonState): string {
   switch (state) {
     case "idle":
-      return "bg-white dark:bg-gray-700 border-slate-800 dark:border-gray-500 text-slate-800 dark:text-white hover:bg-blue-50 dark:hover:bg-blue-900/40 hover:border-blue-600 dark:hover:border-blue-400 active:border-b-[2px] active:translate-y-[4px] cursor-pointer";
+      return "bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-slate-200 dark:border-gray-600 text-slate-700 dark:text-gray-100 hover:bg-white dark:hover:bg-gray-700 hover:border-indigo-400 dark:hover:border-indigo-500 border-b-[6px] active:border-b-[2px] active:translate-y-[4px] cursor-pointer shadow-sm hover:shadow-indigo-500/20 transition-all";
     case "selected":
-      return "bg-blue-100 dark:bg-blue-900/60 border-blue-600 dark:border-blue-400 border-b-[6px] scale-[0.97] cursor-pointer text-blue-900 dark:text-blue-100";
+      return "bg-indigo-50 dark:bg-indigo-900/60 border-indigo-500 dark:border-indigo-400 border-b-[2px] translate-y-[4px] cursor-pointer text-indigo-700 dark:text-indigo-200 shadow-[inset_0_3px_6px_rgba(0,0,0,0.1)] ring-2 ring-indigo-500/30";
     case "correct":
-      return "bg-green-400 dark:bg-green-600 border-green-700 dark:border-green-800 border-b-[2px] translate-y-[4px] cursor-default opacity-80 text-white";
+      return "bg-emerald-500 dark:bg-emerald-600 border-emerald-700 border-b-[2px] translate-y-[4px] cursor-default text-white shadow-[0_0_20px_rgba(16,185,129,0.5)] ring-2 ring-emerald-500/50 z-10";
     case "incorrect":
-      return "bg-red-400 dark:bg-red-600 border-red-700 dark:border-red-800 border-b-[6px] cursor-default text-white";
+      return "bg-red-500 dark:bg-red-600 border-red-700 border-b-[2px] translate-y-[4px] cursor-default text-white shadow-[0_0_20px_rgba(239,68,68,0.5)] ring-2 ring-red-500/50 z-10";
   }
 }
 
@@ -109,7 +109,7 @@ export default function WordButton({ word, lang, state, disabled, onClick }: Wor
         <span
           className={`
             absolute top-1 right-1.5 text-[9px] font-black rounded-full px-1.5 py-0.5 uppercase tracking-wider
-            ${lang === "en" ? "bg-blue-500 text-white" : "bg-amber-400 text-black"}
+            ${lang === "en" ? "bg-indigo-500 text-white shadow-sm" : "bg-amber-400 text-amber-950 shadow-sm"}
           `}
         >
           {lang === "en" ? "EN" : "ID"}

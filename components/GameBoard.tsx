@@ -58,20 +58,20 @@ function SpeedTimer({ timeLeft }: { timeLeft: number }) {
   return (
     <motion.div
       className={`
-        flex items-center gap-2 px-3 py-1.5 rounded-xl border-2 border-b-[4px] font-black
-        ${urgent ? "bg-red-50 dark:bg-red-900/40 border-red-400 text-red-600 dark:text-red-400"
-          : warning ? "bg-orange-50 dark:bg-orange-900/40 border-orange-400 text-orange-600 dark:text-orange-400"
-          : "bg-green-50 dark:bg-green-900/40 border-green-400 text-green-700 dark:text-green-400"}
+        flex items-center gap-2 px-3 py-1.5 rounded-xl border-2 font-black backdrop-blur-md shadow-sm transition-colors duration-300
+        ${urgent ? "bg-red-50/90 dark:bg-red-900/50 border-red-500 text-red-600 dark:text-red-300 shadow-red-500/20"
+          : warning ? "bg-amber-50/90 dark:bg-amber-900/50 border-amber-500 text-amber-600 dark:text-amber-300 shadow-amber-500/20"
+          : "bg-white/90 dark:bg-gray-800/90 border-slate-200 dark:border-gray-600 text-slate-700 dark:text-gray-200"}
       `}
-      animate={urgent ? { scale: [1, 1.06, 1] } : {}}
+      animate={urgent ? { scale: [1, 1.05, 1] } : {}}
       transition={urgent ? { duration: 0.5, repeat: Infinity } : {}}
     >
-      <span className="text-base">⏱️</span>
+      <span className="text-base drop-shadow-sm">⏱️</span>
       <span className="text-base tabular-nums w-7 text-center">{timeLeft}</span>
       {/* mini bar */}
-      <div className="w-14 h-1.5 bg-slate-200 dark:bg-gray-700 rounded-full overflow-hidden">
+      <div className="w-14 h-1.5 bg-slate-200/50 dark:bg-gray-700/50 rounded-full overflow-hidden shadow-inner">
         <motion.div
-          className={`h-full rounded-full ${urgent ? "bg-red-500" : warning ? "bg-orange-400" : "bg-green-500"}`}
+          className={`h-full rounded-full ${urgent ? "bg-red-500" : warning ? "bg-amber-500" : "bg-emerald-500"}`}
           animate={{ width: `${pct * 100}%` }}
           transition={{ duration: 0.5 }}
         />
@@ -366,8 +366,8 @@ export default function GameBoard({ level, mode, onLevelComplete, onBackToMenu }
             {mode === "speed" ? (
               <SpeedTimer timeLeft={timeLeft} />
             ) : (
-              <div className="flex items-center gap-1 text-blue-600 bg-blue-50 dark:bg-blue-900/40 dark:text-blue-300 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-700 text-sm font-black">
-                ⭐ {Math.round(xp)} XP
+              <div className="flex items-center gap-1 text-amber-600 bg-amber-50/90 dark:bg-amber-900/40 dark:text-amber-300 px-3 py-1.5 rounded-full border border-amber-200 dark:border-amber-700/50 text-sm font-black shadow-sm backdrop-blur-md">
+                <span className="drop-shadow-sm">⭐</span> {Math.round(xp)} XP
               </div>
             )}
           </div>

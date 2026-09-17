@@ -159,8 +159,8 @@ export default function TypingBoard({ level, onLevelComplete, onBackToMenu }: Ty
               </span>
             </div>
 
-            <div className="flex items-center gap-1 text-blue-600 bg-blue-50 dark:bg-blue-900/40 dark:text-blue-300 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-700 text-sm font-black">
-              ⭐ {xp} XP
+            <div className="flex items-center gap-1 text-amber-600 bg-amber-50/90 dark:bg-amber-900/40 dark:text-amber-300 px-3 py-1.5 rounded-full border border-amber-200 dark:border-amber-700/50 text-sm font-black shadow-sm backdrop-blur-md">
+              <span className="drop-shadow-sm">⭐</span> {xp} XP
             </div>
           </div>
 
@@ -211,7 +211,7 @@ export default function TypingBoard({ level, onLevelComplete, onBackToMenu }: Ty
             onChange={(e) => setInputValue(e.target.value)}
             disabled={isChecking}
             placeholder="Ketik di sini..."
-            className="w-full bg-white dark:bg-gray-800 border-2 border-b-[6px] border-slate-300 dark:border-gray-600 rounded-2xl px-6 py-5 text-xl font-bold text-slate-800 dark:text-white outline-none focus:border-blue-400 dark:focus:border-blue-500 transition-all placeholder:text-slate-300 dark:placeholder:text-gray-500 text-center"
+            className="w-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-2 border-b-[6px] border-slate-200 dark:border-gray-600 rounded-2xl px-6 py-5 text-xl font-bold text-slate-700 dark:text-gray-100 outline-none focus:border-indigo-400 dark:focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 shadow-sm transition-all placeholder:text-slate-300 dark:placeholder:text-gray-500 text-center"
             autoComplete="off"
             autoCorrect="off"
             spellCheck="false"
@@ -222,8 +222,8 @@ export default function TypingBoard({ level, onLevelComplete, onBackToMenu }: Ty
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`absolute left-0 right-0 top-full mt-4 p-4 rounded-2xl border-2 border-b-[4px] text-center
-                  ${isCorrect ? 'bg-green-100 border-green-500 text-green-800 dark:bg-green-900/40 dark:text-green-200' : 'bg-red-100 border-red-500 text-red-800 dark:bg-red-900/40 dark:text-red-200'}`}
+                className={`absolute left-0 right-0 top-full mt-4 p-4 rounded-2xl border-2 text-center backdrop-blur-md shadow-xl
+                  ${isCorrect ? 'bg-emerald-500/90 border-emerald-400 text-white shadow-emerald-500/20' : 'bg-red-500/90 border-red-400 text-white shadow-red-500/20'}`}
               >
                 {isCorrect ? (
                   <p className="font-black text-lg flex items-center justify-center gap-2"><span>✅</span> Benar!</p>

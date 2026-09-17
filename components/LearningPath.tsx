@@ -15,100 +15,136 @@ const UNITS = [
   {
     cefr: "A1" as const,
     label: "Beginner",
-    desc: "Kuasai 112 kata dasar Oxford",
-    colorClass: "from-green-500 to-emerald-600",
-    badgeClass: "bg-green-100 dark:bg-green-900/60 text-green-800 dark:text-green-300 border-green-400 dark:border-green-600",
-    ringClass: "ring-green-400",
-    nodeActive: "bg-green-500 border-green-700 shadow-green-300/50",
-    nodeDone: "bg-green-400 border-green-600",
+    desc: "Kuasai kata-kata dasar Oxford",
+    gradient: "from-emerald-400 to-teal-500",
+    gradientDark: "from-emerald-500 to-teal-600",
+    glowColor: "shadow-emerald-500/30",
+    badgeBg: "bg-emerald-100 dark:bg-emerald-900/50",
+    badgeText: "text-emerald-700 dark:text-emerald-300",
+    badgeBorder: "border-emerald-300 dark:border-emerald-600/50",
+    nodeActive: "from-emerald-400 to-teal-500",
+    nodeGlow: "shadow-emerald-500/50",
+    ringColor: "#10B981",
     emoji: "🌱",
   },
   {
     cefr: "A2" as const,
     label: "Elementary",
-    desc: "Tingkatkan dengan 160 kata A2",
-    colorClass: "from-blue-500 to-indigo-600",
-    badgeClass: "bg-blue-100 dark:bg-blue-900/60 text-blue-800 dark:text-blue-300 border-blue-400 dark:border-blue-600",
-    ringClass: "ring-blue-400",
-    nodeActive: "bg-blue-500 border-blue-700 shadow-blue-300/50",
-    nodeDone: "bg-blue-400 border-blue-600",
+    desc: "Tingkatkan kosakata harianmu",
+    gradient: "from-blue-400 to-indigo-500",
+    gradientDark: "from-blue-500 to-indigo-600",
+    glowColor: "shadow-blue-500/30",
+    badgeBg: "bg-blue-100 dark:bg-blue-900/50",
+    badgeText: "text-blue-700 dark:text-blue-300",
+    badgeBorder: "border-blue-300 dark:border-blue-600/50",
+    nodeActive: "from-blue-400 to-indigo-500",
+    nodeGlow: "shadow-blue-500/50",
+    ringColor: "#3B82F6",
     emoji: "📖",
   },
   {
     cefr: "B1" as const,
     label: "Intermediate",
-    desc: "Kuasai 128 kata tingkat menengah",
-    colorClass: "from-purple-500 to-violet-600",
-    badgeClass: "bg-purple-100 dark:bg-purple-900/60 text-purple-800 dark:text-purple-300 border-purple-400 dark:border-purple-600",
-    ringClass: "ring-purple-400",
-    nodeActive: "bg-purple-500 border-purple-700 shadow-purple-300/50",
-    nodeDone: "bg-purple-400 border-purple-600",
+    desc: "Level menengah, makin jago!",
+    gradient: "from-violet-500 to-purple-600",
+    gradientDark: "from-violet-600 to-purple-700",
+    glowColor: "shadow-violet-500/30",
+    badgeBg: "bg-violet-100 dark:bg-violet-900/50",
+    badgeText: "text-violet-700 dark:text-violet-300",
+    badgeBorder: "border-violet-300 dark:border-violet-600/50",
+    nodeActive: "from-violet-500 to-purple-600",
+    nodeGlow: "shadow-violet-500/50",
+    ringColor: "#8B5CF6",
     emoji: "🚀",
   },
   {
     cefr: "B2" as const,
     label: "Upper Intermediate",
-    desc: "Kuasai 128 kata sulit",
-    colorClass: "from-pink-500 to-rose-600",
-    badgeClass: "bg-pink-100 dark:bg-pink-900/60 text-pink-800 dark:text-pink-300 border-pink-400 dark:border-pink-600",
-    ringClass: "ring-pink-400",
-    nodeActive: "bg-pink-500 border-pink-700 shadow-pink-300/50",
-    nodeDone: "bg-pink-400 border-pink-600",
+    desc: "Hampir setara native speaker!",
+    gradient: "from-pink-500 to-rose-600",
+    gradientDark: "from-pink-600 to-rose-700",
+    glowColor: "shadow-pink-500/30",
+    badgeBg: "bg-pink-100 dark:bg-pink-900/50",
+    badgeText: "text-pink-700 dark:text-pink-300",
+    badgeBorder: "border-pink-300 dark:border-pink-600/50",
+    nodeActive: "from-pink-500 to-rose-500",
+    nodeGlow: "shadow-pink-500/50",
+    ringColor: "#EC4899",
     emoji: "🏆",
   },
   {
     cefr: "C1" as const,
     label: "Advanced",
-    desc: "Kosakata level Dewa!",
-    colorClass: "from-fuchsia-600 to-purple-800",
-    badgeClass: "bg-fuchsia-100 dark:bg-fuchsia-900/60 text-fuchsia-800 dark:text-fuchsia-300 border-fuchsia-400 dark:border-fuchsia-600",
-    ringClass: "ring-fuchsia-400",
-    nodeActive: "bg-fuchsia-500 border-fuchsia-700 shadow-fuchsia-300/50",
-    nodeDone: "bg-fuchsia-400 border-fuchsia-600",
-    emoji: "🐉",
+    desc: "Kosakata level elite & dewa!",
+    gradient: "from-amber-500 to-orange-600",
+    gradientDark: "from-amber-600 to-orange-700",
+    glowColor: "shadow-amber-500/30",
+    badgeBg: "bg-amber-100 dark:bg-amber-900/50",
+    badgeText: "text-amber-700 dark:text-amber-300",
+    badgeBorder: "border-amber-300 dark:border-amber-600/50",
+    nodeActive: "from-amber-400 to-orange-500",
+    nodeGlow: "shadow-amber-500/50",
+    ringColor: "#F59E0B",
+    emoji: "👑",
   },
   {
     cefr: "TECH" as const,
     label: "Technology",
-    desc: "Kosakata IT & Coding",
-    colorClass: "from-cyan-500 to-blue-600",
-    badgeClass: "bg-cyan-100 dark:bg-cyan-900/60 text-cyan-800 dark:text-cyan-300 border-cyan-400 dark:border-cyan-600",
-    ringClass: "ring-cyan-400",
-    nodeActive: "bg-cyan-500 border-cyan-700 shadow-cyan-300/50",
-    nodeDone: "bg-cyan-400 border-cyan-600",
+    desc: "Dunia IT, coding & digital",
+    gradient: "from-cyan-400 to-sky-500",
+    gradientDark: "from-cyan-500 to-sky-600",
+    glowColor: "shadow-cyan-500/30",
+    badgeBg: "bg-cyan-100 dark:bg-cyan-900/50",
+    badgeText: "text-cyan-700 dark:text-cyan-300",
+    badgeBorder: "border-cyan-300 dark:border-cyan-600/50",
+    nodeActive: "from-cyan-400 to-sky-500",
+    nodeGlow: "shadow-cyan-500/50",
+    ringColor: "#06B6D4",
     emoji: "💻",
   },
   {
     cefr: "BUSINESS" as const,
     label: "Business",
-    desc: "Bisnis & Finansial",
-    colorClass: "from-amber-500 to-orange-600",
-    badgeClass: "bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300 border-amber-400 dark:border-amber-600",
-    ringClass: "ring-amber-400",
-    nodeActive: "bg-amber-500 border-amber-700 shadow-amber-300/50",
-    nodeDone: "bg-amber-400 border-amber-600",
+    desc: "Bisnis, finansial & karier",
+    gradient: "from-yellow-400 to-amber-500",
+    gradientDark: "from-yellow-500 to-amber-600",
+    glowColor: "shadow-yellow-500/30",
+    badgeBg: "bg-yellow-100 dark:bg-yellow-900/50",
+    badgeText: "text-yellow-700 dark:text-yellow-300",
+    badgeBorder: "border-yellow-300 dark:border-yellow-600/50",
+    nodeActive: "from-yellow-400 to-amber-500",
+    nodeGlow: "shadow-yellow-500/50",
+    ringColor: "#EAB308",
     emoji: "🏢",
   },
   {
     cefr: "TRAVEL" as const,
     label: "Travel",
-    desc: "Bandara & Liburan",
-    colorClass: "from-sky-400 to-indigo-500",
-    badgeClass: "bg-sky-100 dark:bg-sky-900/60 text-sky-800 dark:text-sky-300 border-sky-400 dark:border-sky-600",
-    ringClass: "ring-sky-400",
-    nodeActive: "bg-sky-500 border-sky-700 shadow-sky-300/50",
-    nodeDone: "bg-sky-400 border-sky-600",
+    desc: "Bandara, hotel & liburan",
+    gradient: "from-sky-400 to-blue-500",
+    gradientDark: "from-sky-500 to-blue-600",
+    glowColor: "shadow-sky-500/30",
+    badgeBg: "bg-sky-100 dark:bg-sky-900/50",
+    badgeText: "text-sky-700 dark:text-sky-300",
+    badgeBorder: "border-sky-300 dark:border-sky-600/50",
+    nodeActive: "from-sky-400 to-blue-500",
+    nodeGlow: "shadow-sky-500/50",
+    ringColor: "#0EA5E9",
     emoji: "✈️",
   },
   {
     cefr: "SLANG" as const,
     label: "Slang & Idiom",
-    desc: "Bahasa Gaul Native",
-    colorClass: "from-rose-500 to-red-600",
-    badgeClass: "bg-rose-100 dark:bg-rose-900/60 text-rose-800 dark:text-rose-300 border-rose-400 dark:border-rose-600",
-    ringClass: "ring-rose-400",
-    nodeActive: "bg-rose-500 border-rose-700 shadow-rose-300/50",
-    nodeDone: "bg-rose-400 border-rose-600",
+    desc: "Bahasa gaul native speaker",
+    gradient: "from-fuchsia-500 to-pink-600",
+    gradientDark: "from-fuchsia-600 to-pink-700",
+    glowColor: "shadow-fuchsia-500/30",
+    badgeBg: "bg-fuchsia-100 dark:bg-fuchsia-900/50",
+    badgeText: "text-fuchsia-700 dark:text-fuchsia-300",
+    badgeBorder: "border-fuchsia-300 dark:border-fuchsia-600/50",
+    nodeActive: "from-fuchsia-500 to-pink-600",
+    nodeGlow: "shadow-fuchsia-500/50",
+    ringColor: "#D946EF",
     emoji: "😎",
   },
 ];
@@ -126,80 +162,118 @@ function LevelNode({
   unitConfig,
   stars,
   onClick,
+  index,
 }: {
   level: Level;
   status: NodeStatus;
   unitConfig: (typeof UNITS)[number];
   stars: number;
   onClick: () => void;
+  index: number;
 }) {
   const isCurrent = status === "current";
   const isDone = status === "completed";
   const isLocked = status === "locked";
 
-  const nodeStyle = isDone
-    ? unitConfig.nodeDone
-    : isCurrent
-    ? unitConfig.nodeActive
-    : "bg-slate-200 dark:bg-gray-700 border-slate-400 dark:border-gray-600";
-
   return (
     <div className="flex flex-col items-center gap-1.5 relative">
-      {/* Pulsing outer ring for current node */}
+      {/* Pulsing ring for current node */}
       {isCurrent && (
-        <motion.div
-          className={`absolute inset-0 rounded-full ring-4 ${unitConfig.ringClass} opacity-60`}
-          animate={{ scale: [1, 1.28, 1], opacity: [0.6, 0, 0.6] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          style={{ width: 64, height: 64 }}
-        />
+        <>
+          <motion.div
+            className="absolute rounded-full"
+            style={{
+              inset: -6,
+              background: `radial-gradient(circle, ${unitConfig.ringColor}30, transparent 70%)`,
+            }}
+            animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute rounded-full border-2"
+            style={{
+              inset: -4,
+              borderColor: unitConfig.ringColor + "60",
+            }}
+            animate={{ scale: [1, 1.2, 1], opacity: [0.8, 0, 0.8] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+          />
+        </>
       )}
 
       <motion.button
         onClick={!isLocked ? onClick : undefined}
-        whileHover={!isLocked ? { scale: 1.12, y: -3 } : {}}
-        whileTap={!isLocked ? { scale: 0.92 } : {}}
+        whileHover={!isLocked ? { scale: 1.15, y: -4 } : {}}
+        whileTap={!isLocked ? { scale: 0.9 } : {}}
+        initial={{ scale: 0.6, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: index * 0.04, type: "spring", stiffness: 260, damping: 20 }}
         className={`
           relative w-16 h-16 rounded-full
-          border-2 border-b-[5px]
           flex items-center justify-center text-2xl
           shadow-lg transition-all duration-150
-          ${nodeStyle}
-          ${isLocked ? "cursor-not-allowed opacity-40" : "cursor-pointer"}
+          ${isDone
+            ? `bg-gradient-to-br ${unitConfig.nodeActive} shadow-lg ${unitConfig.nodeGlow}`
+            : isCurrent
+            ? `bg-gradient-to-br ${unitConfig.nodeActive} shadow-xl ${unitConfig.nodeGlow}`
+            : "bg-slate-200 dark:bg-slate-700/80"
+          }
+          ${isLocked ? "cursor-not-allowed opacity-35" : "cursor-pointer"}
         `}
       >
-        <span className="relative z-10 select-none">
+        {/* Inner circle */}
+        {(isDone || isCurrent) && (
+          <div className="absolute inset-1 rounded-full bg-white/15" />
+        )}
+        <span className="relative z-10 select-none text-2xl">
           {isDone ? "✅" : isLocked ? "🔒" : level.emoji}
         </span>
+
+        {/* Level number badge */}
+        {!isLocked && (
+          <div className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full text-[9px] font-black flex items-center justify-center text-white shadow-md
+            ${isDone ? "bg-emerald-500" : "bg-white/30 backdrop-blur-sm border border-white/50"}`}>
+            {level.level}
+          </div>
+        )}
       </motion.button>
 
-      {/* Level title label */}
-      <span
+      {/* Label */}
+      <motion.span
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: index * 0.04 + 0.1 }}
         className={`
           text-[10px] font-black text-center leading-tight max-w-[80px]
-          ${isDone ? "text-green-600 dark:text-green-400" : isCurrent ? "text-blue-600 dark:text-blue-300" : "text-slate-400 dark:text-gray-600"}
+          ${isDone
+            ? "text-emerald-600 dark:text-emerald-400"
+            : isCurrent
+            ? "text-indigo-600 dark:text-indigo-300"
+            : "text-slate-400 dark:text-slate-600"
+          }
         `}
       >
         {level.title.replace(/^(A1|A2|B1|B2|C1|TECH|BUSINESS|TRAVEL|SLANG) — /, "")}
-      </span>
+      </motion.span>
 
-      {/* Stars display */}
+      {/* Stars */}
       {isDone && (
-        <div className="flex gap-0.5 mt-0.5">
+        <div className="flex gap-0.5">
           {[1, 2, 3].map((s) => (
-            <span key={s} className={`text-xs ${s <= stars ? "opacity-100 drop-shadow-md" : "opacity-20 grayscale"}`}>
+            <span key={s} className={`text-xs ${s <= stars ? "opacity-100" : "opacity-15 grayscale"}`}>
               ⭐
             </span>
           ))}
         </div>
       )}
 
-      {/* "MAIN!" bounce label on current node */}
+      {/* "MAIN!" bounce on current */}
       {isCurrent && (
         <motion.span
-          animate={{ y: [0, -4, 0] }}
-          transition={{ duration: 1.1, repeat: Infinity, ease: "easeInOut" }}
-          className="text-[9px] font-black text-blue-500 dark:text-blue-400 uppercase tracking-widest"
+          animate={{ y: [0, -5, 0] }}
+          transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+          className="text-[9px] font-black uppercase tracking-widest"
+          style={{ color: unitConfig.ringColor }}
         >
           ▶ MAIN!
         </motion.span>
@@ -214,104 +288,105 @@ function UnitHeader({
   completedCount,
   total,
   locked,
+  index,
 }: {
   unit: (typeof UNITS)[number];
   completedCount: number;
   total: number;
   locked: boolean;
+  index: number;
 }) {
   const pct = total > 0 ? (completedCount / total) * 100 : 0;
 
   return (
-    <div
-      className={`
-        relative rounded-3xl overflow-hidden mb-4
-        border-2 border-b-[4px]
-        ${locked ? "border-slate-300 dark:border-gray-700 opacity-50" : `border-slate-200 dark:border-gray-700`}
-      `}
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.05, duration: 0.4 }}
+      className={`relative rounded-3xl overflow-hidden mb-5 ${locked ? "opacity-50" : ""}`}
     >
-      {/* Gradient top strip */}
-      <div className={`h-2 w-full bg-gradient-to-r ${unit.colorClass} ${locked ? "opacity-40" : ""}`} />
-
-      <div className="bg-white dark:bg-gray-800 px-4 py-3">
+      {/* Gradient header strip */}
+      <div className={`bg-gradient-to-r ${unit.gradient} p-5`}>
         <div className="flex items-center gap-3">
-          <div
-            className={`
-              w-12 h-12 rounded-2xl flex items-center justify-center text-2xl
-              bg-gradient-to-br ${unit.colorClass}
-              ${locked ? "grayscale" : "shadow-lg"}
-            `}
-          >
+          <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-2xl shadow-lg">
             {locked ? "🔒" : unit.emoji}
           </div>
-
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-0.5">
-              <span className={`text-xs font-black uppercase tracking-widest px-2 py-0.5 rounded-full border ${unit.badgeClass}`}>
+              <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-white/20 text-white border border-white/30`}>
                 {unit.cefr}
               </span>
-              <span className="text-xs font-bold text-slate-500 dark:text-gray-400">{unit.label}</span>
+              <span className="text-xs font-bold text-white/80">{unit.label}</span>
             </div>
-            <p className="text-[10px] text-slate-400 dark:text-gray-500 font-bold">{unit.desc}</p>
+            <p className="text-white font-black text-sm">{unit.desc}</p>
           </div>
-
           <div className="text-right">
-            <span className="text-lg font-black text-slate-700 dark:text-gray-200">
-              {completedCount}/{total}
+            <span className="text-2xl font-black text-white" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
+              {completedCount}
             </span>
+            <span className="text-white/60 font-bold text-sm">/{total}</span>
           </div>
         </div>
 
         {/* Progress bar */}
         {!locked && (
-          <div className="mt-3 h-2.5 bg-slate-100 dark:bg-gray-700 rounded-full overflow-hidden">
-            <motion.div
-              className={`h-full rounded-full bg-gradient-to-r ${unit.colorClass}`}
-              initial={{ width: 0 }}
-              animate={{ width: `${pct}%` }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            />
+          <div className="mt-3">
+            <div className="h-2 bg-white/20 rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-white/80 rounded-full shadow-sm"
+                initial={{ width: 0 }}
+                animate={{ width: `${pct}%` }}
+                transition={{ duration: 1, ease: "easeOut", delay: index * 0.05 + 0.2 }}
+              />
+            </div>
+            {pct === 100 && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-white font-bold text-xs mt-1.5 flex items-center gap-1"
+              >
+                <span>🎉</span> Unit selesai!
+              </motion.p>
+            )}
           </div>
         )}
 
         {locked && (
-          <p className="mt-2 text-[11px] font-bold text-slate-400 dark:text-gray-500">
-            🔒 Selesaikan semua level {unit.cefr === "A2" ? "A1" : "A2"} untuk membuka ini
+          <p className="mt-2 text-[11px] font-bold text-white/70">
+            🔒 Selesaikan unit sebelumnya untuk membuka
           </p>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
-// ── Milestone card shown inline in path ───────────────────────────────────────
+// ── Milestone card ────────────────────────────────────────────────────────────
 function InlineMilestoneCard({ unit }: { unit: (typeof UNITS)[number] }) {
   return (
     <motion.div
       initial={{ scale: 0.8, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ type: "spring", stiffness: 200, damping: 18 }}
-      className={`
-        my-4 mx-2 p-4 rounded-3xl border-2 border-b-[4px] text-center
-        bg-gradient-to-r ${unit.colorClass} text-white shadow-xl relative overflow-hidden
-      `}
+      className={`my-4 mx-2 p-5 rounded-3xl text-center bg-gradient-to-br ${unit.gradient} text-white shadow-2xl relative overflow-hidden`}
     >
-      {/* Stars burst decoration */}
-      {["⭐", "✨", "🎉"].map((s, i) => (
+      {["⭐", "✨", "🎉", "🌟"].map((s, i) => (
         <motion.span
           key={i}
-          className="absolute text-xl opacity-30"
-          style={{ top: `${20 + i * 25}%`, left: i % 2 === 0 ? "5%" : "85%" }}
+          className="absolute text-lg opacity-30"
+          style={{ top: `${15 + i * 20}%`, left: i % 2 === 0 ? "4%" : "86%" }}
           animate={{ rotate: [0, 20, -20, 0], y: [0, -5, 0] }}
           transition={{ duration: 2 + i * 0.5, repeat: Infinity, ease: "easeInOut" }}
         >
           {s}
         </motion.span>
       ))}
-      <div className="text-3xl mb-1">🏅</div>
-      <p className="font-black text-base">Unit {unit.cefr} Selesai!</p>
-      <p className="font-bold text-xs opacity-80 mt-0.5">
-        Luar biasa! Kamu telah menguasai level {unit.cefr} 🦍
+      <div className="text-4xl mb-2">🏅</div>
+      <p className="font-black text-base mb-0.5" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
+        Unit {unit.cefr} Conquered!
+      </p>
+      <p className="font-semibold text-xs text-white/80">
+        Luar biasa! Kamu telah menguasai {unit.label} 💪
       </p>
     </motion.div>
   );
@@ -320,15 +395,15 @@ function InlineMilestoneCard({ unit }: { unit: (typeof UNITS)[number] }) {
 // ── Main LearningPath component ───────────────────────────────────────────────
 export default function LearningPath({ completedLevels, stars, onSelectLevel }: LearningPathProps) {
   const completedSet = new Set(completedLevels);
+  let nodeIndex = 0;
 
   return (
     <div className="max-w-sm mx-auto pb-8">
-      {UNITS.map((unit) => {
+      {UNITS.map((unit, unitIdx) => {
         const unitLevels = vocabularyData.filter((l) => l.cefr === unit.cefr);
         const completedInUnit = unitLevels.filter((l) => completedSet.has(l.level)).length;
         const unitComplete = completedInUnit === unitLevels.length && unitLevels.length > 0;
 
-        // Unit is locked if its FIRST level is locked (no previous level done)
         const firstLevel = unitLevels[0];
         const unitLocked =
           firstLevel != null &&
@@ -337,52 +412,45 @@ export default function LearningPath({ completedLevels, stars, onSelectLevel }: 
           !completedSet.has(firstLevel.level);
 
         return (
-          <div key={unit.cefr}>
+          <div key={unit.cefr} className="mb-2">
             <UnitHeader
               unit={unit}
               completedCount={completedInUnit}
               total={unitLevels.length}
               locked={unitLocked}
+              index={unitIdx}
             />
 
             {!unitLocked && (
               <div className="relative pb-2">
-                {/* ── Dotted center guide line ── */}
+                {/* Connector line */}
                 <div
-                  className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 pointer-events-none"
+                  className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 pointer-events-none w-px"
                   style={{
-                    width: 2,
-                    background:
-                      "repeating-linear-gradient(to bottom, #CBD5E1 0px, #CBD5E1 8px, transparent 8px, transparent 18px)",
+                    background: `linear-gradient(to bottom, transparent, ${unit.ringColor}40, transparent)`,
                   }}
                 />
 
-                {/* ── Level nodes in zigzag ── */}
-                <div className="flex flex-col gap-7">
+                {/* Level nodes in zigzag */}
+                <div className="flex flex-col gap-8">
                   {unitLevels.map((level, i) => {
                     const status = getNodeStatus(level, completedSet);
                     const isLeft = i % 2 === 0;
+                    const currentNodeIndex = nodeIndex++;
 
                     return (
                       <div
                         key={level.level}
-                        className={`relative flex ${isLeft ? "justify-start pl-4" : "justify-end pr-4"}`}
+                        className={`relative flex ${isLeft ? "justify-start pl-6" : "justify-end pr-6"}`}
                       >
-                        <AnimatePresence>
-                          <motion.div
-                            initial={{ scale: 0.7, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            transition={{ delay: i * 0.04, type: "spring", stiffness: 220, damping: 20 }}
-                          >
-                            <LevelNode
-                              level={level}
-                              status={status}
-                              unitConfig={unit}
-                              stars={stars[level.level] || 0}
-                              onClick={() => onSelectLevel(level)}
-                            />
-                          </motion.div>
-                        </AnimatePresence>
+                        <LevelNode
+                          level={level}
+                          status={status}
+                          unitConfig={unit}
+                          stars={stars[level.level] || 0}
+                          onClick={() => onSelectLevel(level)}
+                          index={currentNodeIndex}
+                        />
                       </div>
                     );
                   })}
@@ -390,11 +458,8 @@ export default function LearningPath({ completedLevels, stars, onSelectLevel }: 
               </div>
             )}
 
-            {/* Milestone card shown after completing all levels in unit */}
             {unitComplete && <InlineMilestoneCard unit={unit} />}
-
-            {/* Spacer between units */}
-            <div className="h-4" />
+            <div className="h-6" />
           </div>
         );
       })}

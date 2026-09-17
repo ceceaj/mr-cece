@@ -165,15 +165,15 @@ export default function SmartReviewBoard({ mistakeIds, onComplete, onBackToMenu 
               const isSelected = selectedAnswer === opt.id;
               const isCorrectAnswer = currentPair?.id === opt.id;
               
-              let stateClass = "bg-white dark:bg-gray-800 border-slate-200 dark:border-gray-700 text-slate-700 dark:text-gray-200 hover:bg-slate-50";
+              let stateClass = "bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-slate-200 dark:border-gray-600 text-slate-700 dark:text-gray-100 hover:border-indigo-400 shadow-sm hover:shadow-indigo-500/20";
               
               if (isChecking) {
                 if (isCorrectAnswer) {
-                  stateClass = "bg-green-100 dark:bg-green-900/60 border-green-500 text-green-800 dark:text-green-200 scale-[1.02] z-10";
+                  stateClass = "bg-emerald-500 dark:bg-emerald-600 border-emerald-700 text-white shadow-[0_0_20px_rgba(16,185,129,0.5)] scale-[1.02] z-10";
                 } else if (isSelected) {
-                  stateClass = "bg-red-100 dark:bg-red-900/60 border-red-500 text-red-800 dark:text-red-200";
+                  stateClass = "bg-red-500 dark:bg-red-600 border-red-700 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)] z-10";
                 } else {
-                  stateClass = "opacity-40 grayscale";
+                  stateClass = "opacity-40 grayscale bg-white/50 dark:bg-gray-800/50";
                 }
               }
 

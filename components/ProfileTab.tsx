@@ -33,7 +33,7 @@ function ActivityChart({ profile }: { profile: UserProfile }) {
   const maxXp = Math.max(...days.map((d) => d.xp), 10);
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-5 rounded-3xl border-2 border-slate-200 dark:border-gray-700">
+    <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl p-5 rounded-3xl border-2 border-white/50 dark:border-gray-700/50 shadow-xl shadow-indigo-500/5">
       <div className="flex items-center justify-between mb-4">
         <h3 className="font-black text-lg text-slate-800 dark:text-white">📊 Aktivitas 7 Hari</h3>
         <span className="text-xs font-bold text-slate-400 dark:text-gray-500 bg-slate-100 dark:bg-gray-700 px-2 py-1 rounded-full">
@@ -201,11 +201,12 @@ export default function ProfileTab({ profile, onToggleDarkMode, onBuyItem }: Pro
     >
       {/* ── Avatar + Name ── */}
       <div className="flex flex-col items-center text-center">
-        <div className="w-28 h-28 bg-blue-100 dark:bg-blue-900/50 rounded-full border-4 border-blue-500 shadow-lg overflow-hidden mb-3 flex items-center justify-center">
+        <div className="w-28 h-28 bg-indigo-50 dark:bg-indigo-900/50 rounded-full border-4 border-indigo-500 shadow-[0_0_30px_rgba(99,102,241,0.3)] overflow-hidden mb-3 flex items-center justify-center relative group cursor-pointer">
+          <div className="absolute inset-0 bg-indigo-500/0 group-hover:bg-indigo-500/10 transition-colors z-10" />
           <img
             src="/mascot.png"
             alt="Avatar"
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain relative z-0"
             onError={(e) => {
               e.currentTarget.style.display = "none";
               e.currentTarget.parentElement!.innerHTML = '<span class="text-6xl">🦍</span>';
@@ -226,9 +227,9 @@ export default function ProfileTab({ profile, onToggleDarkMode, onBuyItem }: Pro
           { icon: "📚", value: profile.completedLevels.length, label: "Level Selesai", color: "text-green-500" },
           { icon: "💬", value: totalWords, label: "Kata Dikuasai", color: "text-purple-500" },
         ].map((stat) => (
-          <div key={stat.label} className="bg-white dark:bg-gray-800 p-4 rounded-3xl border-2 border-slate-200 dark:border-gray-700 flex flex-col items-center text-center">
-            <span className="text-2xl mb-1">{stat.icon}</span>
-            <span className={`text-xl font-black ${stat.color}`}>{stat.value}</span>
+          <div key={stat.label} className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md p-4 rounded-3xl border-2 border-white/50 dark:border-gray-700/50 flex flex-col items-center text-center shadow-lg shadow-indigo-500/5 hover:scale-[1.02] transition-transform cursor-default">
+            <span className="text-2xl mb-1 drop-shadow-sm">{stat.icon}</span>
+            <span className={`text-xl font-black ${stat.color} drop-shadow-sm`}>{stat.value}</span>
             <span className="text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase leading-tight">{stat.label}</span>
           </div>
         ))}
@@ -238,7 +239,7 @@ export default function ProfileTab({ profile, onToggleDarkMode, onBuyItem }: Pro
       <ActivityChart profile={profile} />
 
       {/* ── Badges ── */}
-      <div className="bg-white dark:bg-gray-800 p-5 rounded-3xl border-2 border-slate-200 dark:border-gray-700">
+      <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl p-5 rounded-3xl border-2 border-white/50 dark:border-gray-700/50 shadow-xl shadow-indigo-500/5">
         <h3 className="font-black text-lg text-slate-800 dark:text-white mb-4 flex items-center gap-2">
           🏅 Badge
           <span className="text-xs font-bold text-slate-400 ml-auto">{unlockedBadgeIds.size}/{BADGES.length}</span>
@@ -269,7 +270,7 @@ export default function ProfileTab({ profile, onToggleDarkMode, onBuyItem }: Pro
       </div>
 
       {/* ── Shop ── */}
-      <div className="bg-white dark:bg-gray-800 p-5 rounded-3xl border-2 border-slate-200 dark:border-gray-700 flex flex-col gap-3">
+      <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl p-5 rounded-3xl border-2 border-white/50 dark:border-gray-700/50 shadow-xl shadow-indigo-500/5 flex flex-col gap-3">
         <div className="flex items-center justify-between mb-2">
           <h3 className="font-black text-lg text-slate-800 dark:text-white flex items-center gap-2">
             🛒 Toko Cece
@@ -317,7 +318,7 @@ export default function ProfileTab({ profile, onToggleDarkMode, onBuyItem }: Pro
       </div>
 
       {/* ── Settings ── */}
-      <div className="bg-white dark:bg-gray-800 p-5 rounded-3xl border-2 border-slate-200 dark:border-gray-700 flex flex-col gap-3">
+      <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl p-5 rounded-3xl border-2 border-white/50 dark:border-gray-700/50 shadow-xl shadow-indigo-500/5 flex flex-col gap-3">
         <h3 className="font-black text-lg text-slate-800 dark:text-white">⚙️ Pengaturan</h3>
 
         {/* Dark mode toggle */}
