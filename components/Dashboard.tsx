@@ -75,9 +75,6 @@ export default function Dashboard({ profile, onSelectLevel, onToggleDarkMode, on
           <div className="max-w-md mx-auto flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                <span className="text-xl">🦍</span>
-              </div>
               <div>
                 <span className="font-black text-lg text-slate-800 dark:text-white tracking-tight" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
                   Mr. <span className="gradient-text">Cece</span>

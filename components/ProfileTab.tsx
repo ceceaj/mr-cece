@@ -201,19 +201,7 @@ export default function ProfileTab({ profile, onToggleDarkMode, onBuyItem }: Pro
     >
       {/* ── Avatar + Name ── */}
       <div className="flex flex-col items-center text-center">
-        <div className="w-28 h-28 bg-indigo-50 dark:bg-indigo-900/50 rounded-full border-4 border-indigo-500 shadow-[0_0_30px_rgba(99,102,241,0.3)] overflow-hidden mb-3 flex items-center justify-center relative group cursor-pointer">
-          <div className="absolute inset-0 bg-indigo-500/0 group-hover:bg-indigo-500/10 transition-colors z-10" />
-          <img
-            src="/mascot.png"
-            alt="Avatar"
-            className="w-full h-full object-contain relative z-0"
-            onError={(e) => {
-              e.currentTarget.style.display = "none";
-              e.currentTarget.parentElement!.innerHTML = '<span class="text-6xl">🦍</span>';
-            }}
-          />
-        </div>
-        <h2 className="text-3xl font-black text-slate-800 dark:text-white">{profile.name}</h2>
+        <h2 className="text-3xl font-black text-slate-800 dark:text-white mt-4">{profile.name}</h2>
         <p className="text-slate-500 dark:text-gray-400 font-bold uppercase tracking-widest mt-1 text-xs">
           Pelajar Level {profile.targetCefr}
         </p>

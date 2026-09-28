@@ -136,7 +136,17 @@ export default function TypingBoard({ level, onLevelComplete, onBackToMenu }: Ty
             gameMode: "typing",
           });
         }}
-        onSecondary={onBackToMenu}
+        onSecondary={() => {
+          setShowLevelComplete(false);
+          onLevelComplete({
+            xpEarned: xpRef.current,
+            perfectRound: hearts === MAX_HEARTS,
+            comboKing: false,
+            matchCount: pairs.length,
+            mistakesMade: Array.from(mistakesRef.current),
+            gameMode: "typing",
+          });
+        }}
       />
 
       {/* ── Header ── */}

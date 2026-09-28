@@ -194,7 +194,7 @@ export default function GameBoard({ level, mode, onLevelComplete, onBackToMenu }
       if (item.state !== "idle" && item.state !== "selected") return;
 
       if (slotType === "en") {
-        speakWord(item.word);
+        setTimeout(() => speakWord(item.word), 10);
         if (selectedEn === item.id) {
           setSelectedEn(null);
           setEnSlots((prev) => prev.map((s) => (s?.id === item.id ? { ...s, state: "idle" } : s)));
@@ -335,7 +335,17 @@ export default function GameBoard({ level, mode, onLevelComplete, onBackToMenu }
             gameMode: mode,
           });
         }}
-        onSecondary={onBackToMenu}
+        onSecondary={() => {
+          setShowLevelComplete(false);
+          onLevelComplete({
+            xpEarned: xpRef.current,
+            perfectRound: heartsRef.current === MAX_HEARTS,
+            comboKing: reachedCombo5Ref.current,
+            matchCount: totalMatchesRef.current,
+            mistakesMade: Array.from(mistakesRef.current),
+            gameMode: mode,
+          });
+        }}
       />
 
       {/* ── Header ── */}

@@ -100,7 +100,7 @@ export default function WordButton({ word, lang, state, disabled, onClick }: Wor
         className={`
           relative w-full h-full px-3 py-2 rounded-2xl font-bold text-sm
           border-2 border-b-[6px] transition-colors duration-100
-          shadow-sm
+          shadow-sm touch-manipulation
           ${getStateClass(state)}
           ${disabled ? "pointer-events-none" : ""}
         `}

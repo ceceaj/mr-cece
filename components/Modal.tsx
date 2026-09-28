@@ -97,21 +97,9 @@ export default function Modal({ isOpen, type, levelTitle, onPrimary, onSecondary
                 </div>
               )}
 
-              {/* Mascot — use gorilla logo */}
-              <div className="relative w-32 h-32">
-                <img
-                  src="/mascot.png"
-                  alt="Mr. Cece"
-                  className="w-full h-full object-contain drop-shadow-xl"
-                  onError={(e) => {
-                    e.currentTarget.style.display = "none";
-                    e.currentTarget.parentElement!.innerHTML = `<span class="text-7xl">${cfg.mascotEmoji}</span>`;
-                  }}
-                />
-                {/* Emoji reaction badge on top of mascot */}
-                <span className="absolute -bottom-1 -right-1 text-3xl">
-                  {cfg.mascotEmoji}
-                </span>
+              {/* Emoji reaction badge */}
+              <div className="text-6xl drop-shadow-lg mb-2">
+                {cfg.mascotEmoji}
               </div>
 
               {levelTitle && (

@@ -151,7 +151,17 @@ export default function ListeningBoard({ level, onLevelComplete, onBackToMenu }:
             gameMode: "listening",
           });
         }}
-        onSecondary={onBackToMenu}
+        onSecondary={() => {
+          setShowLevelComplete(false);
+          onLevelComplete({
+            xpEarned: xpRef.current,
+            perfectRound: hearts === MAX_HEARTS,
+            comboKing: false,
+            matchCount: totalMatchesRef.current,
+            mistakesMade: Array.from(mistakesRef.current),
+            gameMode: "listening",
+          });
+        }}
       />
 
       {/* ── Header ── */}

@@ -1,34 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
-/* ═══════════════════════════════════════════════
-   GOOGLE FONTS
-═══════════════════════════════════════════════ */
+@custom-variant dark (&:is(.dark *));
 
 /* ═══════════════════════════════════════════════
    CSS CUSTOM PROPERTIES — DESIGN TOKENS
 ═══════════════════════════════════════════════ */
 :root {
-  /* Brand Colors */
-  --color-primary: #6366F1;
-  --color-primary-light: #818CF8;
-  --color-primary-dark: #4F46E5;
-  --color-secondary: #8B5CF6;
-  --color-accent: #F59E0B;
+  /* Brand Colors - Navy and Blue Theme */
+  --color-primary: #3B82F6; /* Blue 500 */
+  --color-primary-light: #93C5FD; /* Blue 300 */
+  --color-primary-dark: #1E3A8A; /* Blue 900 */
+  --color-secondary: #0A192F; /* Navy */
+  --color-accent: #60A5FA; /* Light Blue */
   --color-success: #10B981;
   --color-danger: #EF4444;
   --color-info: #06B6D4;
 
   /* Background */
-  --bg-app: #F0F4FF;
+  --bg-app: #F0F4FF; /* Very light blue */
   --bg-card: #FFFFFF;
   --bg-card-hover: #F8FAFF;
 
-  /* Dark mode backgrounds */
-  --dark-bg-app: #080B1A;
-  --dark-bg-card: #0F1629;
-  --dark-bg-card-2: #151B35;
-  --dark-border: rgba(99, 102, 241, 0.15);
+  /* Dark mode backgrounds - Navy */
+  --dark-bg-app: #0A192F;
+  --dark-bg-card: #112240;
+  --dark-bg-card-2: #233554;
+  --dark-border: rgba(59, 130, 246, 0.2);
 
   /* Glassmorphism */
   --glass-bg: rgba(255, 255, 255, 0.08);
@@ -46,9 +44,9 @@
   --radius-xl: 32px;
 
   /* Shadows */
-  --shadow-card: 0 4px 24px rgba(99, 102, 241, 0.08);
-  --shadow-button: 0 4px 14px rgba(99, 102, 241, 0.4);
-  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.5);
+  --shadow-card: 0 4px 24px rgba(59, 130, 246, 0.08);
+  --shadow-button: 0 4px 14px rgba(59, 130, 246, 0.4);
+  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.5);
 }
 
 /* ═══════════════════════════════════════════════
